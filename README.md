@@ -8,7 +8,7 @@ When you want to share some of your chats, it's very difficult to snapshot the e
 
 To install ChatGPT Assistant, follow these steps:
 
-1. Download the latest release of the extension from the [releases page](https://github.com/liady/chatgpt-pdf/releases) on GitHub.
+1. Download the latest release of the extension from the [releases page](https://github.com/liady/ChatGPT-pdf/releases) on GitHub.
 2. Unzip the downloaded file to extract the extension files.
 3. In Google Chrome, open the Extensions page (chrome://extensions/).
 4. Enable Developer mode by clicking the toggle switch in the top right corner of the page.
