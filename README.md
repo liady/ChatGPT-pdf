@@ -1,5 +1,8 @@
 # ChatGPT export to PNG/PDF
 > A Chrome extension for downloading your ChatGPT history to PNG or PDF
+<br/>
+
+![gpt4](https://user-images.githubusercontent.com/7003853/205509643-2283f0fe-3643-4b74-98f6-a0f2489d75ef.gif)
 
 ## Why did I build it
 When you want to share some of your chats, it's very difficult to snapshot the entire chat. This will add the functionality of exporting it to an image or a PDF file.
