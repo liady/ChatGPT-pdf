@@ -9,7 +9,7 @@ When you want to share some of your chats, it's very difficult to snapshot the e
 
 ## How to install it
 
-To install ChatGPT Assistant, follow these steps:
+To install ChatGPT Export, follow these steps:
 
 1. Download the latest release of the extension from the [releases page](https://github.com/liady/ChatGPT-pdf/releases) on GitHub.
 2. Unzip the downloaded file to extract the extension files.
