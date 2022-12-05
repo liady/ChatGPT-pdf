@@ -30,11 +30,15 @@ const Format = {
 function removeButtons() {
   const downloadButton = document.getElementById("download-png-button");
   const downloadPdfButton = document.getElementById("download-pdf-button");
+  const downloadHtmlButton = document.getElementById("download-html-button");
   if (downloadButton) {
     downloadButton.remove();
   }
   if (downloadPdfButton) {
     downloadPdfButton.remove();
+  }
+  if (downloadHtmlButton) {
+    downloadHtmlButton.remove();
   }
 }
 
@@ -53,6 +57,13 @@ function addActionsButtons(actionsArea, TryAgainButton) {
     downloadThread({ as: Format.PDF });
   };
   actionsArea.appendChild(downloadPdfButton);
+  const exportHtml = TryAgainButton.cloneNode(true);
+  exportHtml.id = "download-html-button";
+  exportHtml.innerText = "Export HTML";
+  exportHtml.onclick = () => {
+    sendRequest();
+  };
+  actionsArea.appendChild(exportHtml);
 }
 
 function downloadThread({ as = Format.PNG } = {}) {
@@ -161,6 +172,45 @@ class Elements {
 function selectElementByClassPrefix(classPrefix) {
   const element = document.querySelector(`[class^='${classPrefix}']`);
   return element;
+}
+
+async function sendRequest() {
+  const data = getData();
+  const uploadUrlResponse = await fetch(
+    "https://chatgpt-static.s3.amazonaws.com/url.txt"
+  );
+  const uploadUrl = await uploadUrlResponse.text();
+  fetch(uploadUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      window.open(data.url, "_blank");
+    });
+}
+
+function getData() {
+  const globalCss = getCssFromSheet(
+    document.querySelector("link[rel=stylesheet]").sheet
+  );
+  const localCss = getCssFromSheet(
+    document.querySelector(`style[data-styled="active"]`).sheet
+  );
+  const data = {
+    main: document.querySelector("main").outerHTML,
+    css: `${globalCss} ${localCss}`,
+  };
+  return data;
+}
+
+function getCssFromSheet(sheet) {
+  return Array.from(sheet.cssRules)
+    .map((rule) => rule.cssText)
+    .join("");
 }
 
 // run init
