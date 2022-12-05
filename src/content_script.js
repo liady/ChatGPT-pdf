@@ -3,9 +3,7 @@ async function init() {
     clearInterval(window.buttonsInterval);
   }
   window.buttonsInterval = setInterval(() => {
-    const actionsArea = selectElementByClassPrefix(
-      "PromptTextarea__LastItemActions"
-    );
+    const actionsArea = document.querySelector(".fEGhx");
     if (!actionsArea) {
       return;
     }
@@ -137,12 +135,12 @@ class Elements {
     this.init();
   }
   init() {
-    this.threadWrapper = selectElementByClassPrefix("Thread__Wrapper");
-    this.spacer = selectElementByClassPrefix("ThreadLayout__BottomSpacer");
-    this.thread = selectElementByClassPrefix("ThreadLayout__NodeWrapper");
-    this.positionForm = selectElementByClassPrefix("Thread__PositionForm");
-    this.styledThread = selectElementByClassPrefix("Thread__StyledThread");
-    this.threadContent = selectElementByClassPrefix("Thread__Content");
+    this.threadWrapper = document.querySelector(".cdfdFe");
+    this.spacer = document.querySelector(".gntWOk");
+    this.thread = document.querySelector(".eGLyXw");
+    this.positionForm = document.querySelector(".jqdtxi");
+    this.styledThread = document.querySelector("main");
+    this.threadContent = document.querySelector(".gAnhyd");
     this.scroller = Array.from(
       document.querySelectorAll('[class*="react-scroll-to"]')
     ).filter((el) => el.classList.contains("h-full"))[0];
