@@ -1,11 +1,11 @@
-# ChatGPT export to PNG/PDF
-> A Chrome extension for downloading your ChatGPT history to PNG or PDF
+# ChatGPT export to PNG / PDF / HTML
+> A Chrome extension for downloading your ChatGPT history to PNG, PDF or creating a sharable link
 <br/>
 
 ![gpt4](https://user-images.githubusercontent.com/7003853/205509643-2283f0fe-3643-4b74-98f6-a0f2489d75ef.gif)
 
 ## Why did I build it
-When you want to share some of your chats, it's very difficult to snapshot the entire chat. This will add the functionality of exporting it to an image or a PDF file.
+When you want to share some of your chats, it's very difficult to snapshot the entire chat. This will add the functionality of exporting it to an image, a PDF file, or create a sharable link.
 
 ## How to install it
 
@@ -20,12 +20,12 @@ To install ChatGPT Export, follow these steps:
 
 ## How to use it
 
-After chatting with ChatGPT, you will notice two new buttons at the bottom of the page (next to "Try Again"):
+After chatting with ChatGPT, you will notice new buttons at the bottom of the page (next to "Try Again"):
 <br/><br/>
-<img width="603" alt="image" src="https://user-images.githubusercontent.com/7003853/205508705-f8c90359-8541-4b59-af5a-8a751833de10.png">
-<img width="1241" alt="Arrows2" src="https://user-images.githubusercontent.com/7003853/205508245-27048459-6c7a-48cb-8f43-b8196fb9401b.png">
+<img width="761" alt="image" src="https://user-images.githubusercontent.com/7003853/205524669-6e40f151-d544-4054-a9e5-c05f3dec57a2.png">
+<img width="922" alt="image" src="https://user-images.githubusercontent.com/7003853/205524690-d2facc95-56ee-43ed-9413-be200f4f57b3.png">
 
-Click them to generate a PNG, or download a PDF of the entire chat:
+Click them to generate a PNG, download a PDF or create a HTML of the entire chat:
 <br/>
 <center><img height="600" alt="Arrows2" src="https://user-images.githubusercontent.com/7003853/205508289-fb56f028-021e-4ca5-8dc4-a65626888760.png"></center>
 
