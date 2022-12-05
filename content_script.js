@@ -59,7 +59,7 @@ function addActionsButtons(actionsArea, TryAgainButton) {
   actionsArea.appendChild(downloadPdfButton);
   const exportHtml = TryAgainButton.cloneNode(true);
   exportHtml.id = "download-html-button";
-  exportHtml.innerText = "Export HTML";
+  exportHtml.innerText = "Share Link";
   exportHtml.onclick = () => {
     sendRequest();
   };
