@@ -72,7 +72,9 @@ function downloadThread({ as = Format.PNG } = {}) {
   const pixelRatio = window.devicePixelRatio;
   const minRatio = as === Format.PDF ? 2 : 2.5;
   window.devicePixelRatio = Math.max(pixelRatio, minRatio);
-  html2canvas(elements.thread).then(async function (canvas) {
+  html2canvas(elements.thread, {
+    letterRendering: true,
+  }).then(async function (canvas) {
     elements.restoreLocation();
     window.devicePixelRatio = pixelRatio;
     const imgData = canvas.toDataURL("image/png");
@@ -144,6 +146,7 @@ class Elements {
     this.scroller = Array.from(
       document.querySelectorAll('[class*="react-scroll-to"]')
     ).filter((el) => el.classList.contains("h-full"))[0];
+    this.images = Array.from(document.querySelectorAll("img[srcset]"));
   }
   fixLocation() {
     this.threadWrapper.style.overflow = "auto";
@@ -155,6 +158,11 @@ class Elements {
     this.positionForm.style.display = "none";
     this.scroller.classList.remove("h-full");
     this.scroller.style.minHeight = "100vh";
+    this.images.forEach((img) => {
+      const srcset = img.getAttribute("srcset");
+      img.setAttribute("srcset_old", srcset);
+      img.setAttribute("srcset", "");
+    });
   }
   restoreLocation() {
     this.threadWrapper.style.overflow = null;
@@ -166,6 +174,11 @@ class Elements {
     this.positionForm.style.display = null;
     this.scroller.classList.add("h-full");
     this.scroller.style.minHeight = null;
+    this.images.forEach((img) => {
+      const srcset = img.getAttribute("srcset_old");
+      img.setAttribute("srcset", srcset);
+      img.setAttribute("srcset_old", "");
+    });
   }
 }
 
@@ -202,7 +215,9 @@ function getData() {
   );
   const data = {
     main: document.querySelector("main").outerHTML,
-    css: `${globalCss} ${localCss}`,
+    // css: `${globalCss} /* GLOBAL-LOCAL */ ${localCss}`,
+    globalCss,
+    localCss,
   };
   return data;
 }
