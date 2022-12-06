@@ -70,9 +70,24 @@ function downloadThread({ as = Format.PNG } = {}) {
   const pixelRatio = window.devicePixelRatio;
   const minRatio = as === Format.PDF ? 2 : 2.5;
   window.devicePixelRatio = Math.max(pixelRatio, minRatio);
-  html2canvas(elements.thread, {
-    letterRendering: true,
-  }).then(async function (canvas) {
+  html2canvas(elements.thread, 
+    {
+      letterRendering: true,
+      onclone: function (cloneDoc) {
+        //Make small fix of position to all the text containers
+        let listOfTexts = cloneDoc.getElementsByClassName('min-h-[20px]');
+
+        for (let i = 0, leng = listOfTexts.length; i < leng; i++) {
+          let text = listOfTexts[i];
+          text.style['position'] = 'relative';
+          text.style['top'] = '-8px';
+        }
+
+        //Delete copy button from code blocks
+        cloneDoc.querySelector('button.flex').remove();
+      }
+    }
+  ).then(async function (canvas) {
     elements.restoreLocation();
     window.devicePixelRatio = pixelRatio;
     const imgData = canvas.toDataURL("image/png");
