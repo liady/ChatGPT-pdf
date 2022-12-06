@@ -76,20 +76,16 @@ function downloadThread({ as = Format.PNG } = {}) {
       onclone: function (cloneDoc) {
         //Make small fix of position to all the text containers
         let listOfTexts = cloneDoc.getElementsByClassName('min-h-[20px]');
-
-        for (let i = 0, leng = listOfTexts.length; i < leng; i++) {
-          let text = listOfTexts[i];
-          text.style['position'] = 'relative';
-          text.style['top'] = '-8px';
-        }
+        Array.from(listOfTexts).forEach((text) => {
+          text.style.position = 'relative';
+          text.style.top = '-8px';
+        });
 
         //Delete copy button from code blocks
         let listOfCopyBtns = cloneDoc.querySelectorAll('button.flex');
-
-        for (let i = 0, leng = listOfCopyBtns.length; i < leng; i++) {
-          let button = listOfCopyBtns[i];
-          button.remove();
-        }
+        Array.from(listOfCopyBtns).forEach(
+          (btn) => (btn.remove())
+        );
       }
     }
   ).then(async function (canvas) {
