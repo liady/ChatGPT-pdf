@@ -32,12 +32,11 @@ Click them to generate a PNG, download a PDF or create a HTML of the entire chat
 <br/>
 <center><img height="600" alt="Arrows2" src="https://user-images.githubusercontent.com/7003853/205508289-fb56f028-021e-4ca5-8dc4-a65626888760.png"></center>
 
-## Known issues
-- [ ] Line height might have a small offset (again, due to `html2canvas`). Working on it.
-
 ## Roadmap
 - [ ] Allow choosing resolution / file size
 - [ ] Allow splitting to smaller partial images (for Twitter, for example)
+- [ ] Support Firefox
 
 ## Contribution
+Thanks [adrianmarinwork](https://github.com/adrianmarinwork) for fixing issues.
 PRs welcome!
