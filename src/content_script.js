@@ -3,7 +3,7 @@ async function init() {
     clearInterval(window.buttonsInterval);
   }
   window.buttonsInterval = setInterval(() => {
-    const actionsArea = document.querySelector(".fEGhx");
+    const actionsArea = document.querySelector("form>div>div");
     if (!actionsArea) {
       return;
     }
@@ -135,21 +135,24 @@ class Elements {
     this.init();
   }
   init() {
-    this.threadWrapper = document.querySelector(".cdfdFe");
-    this.spacer = document.querySelector(".gntWOk");
-    this.thread = document.querySelector(".eGLyXw");
-    this.positionForm = document.querySelector(".jqdtxi");
-    this.styledThread = document.querySelector("main");
-    this.threadContent = document.querySelector(".gAnhyd");
+    // this.threadWrapper = document.querySelector(".cdfdFe");
+    this.spacer = document.querySelector(".w-full.h-48.flex-shrink-0");
+    this.thread = document.querySelector(
+      "[class*='react-scroll-to-bottom']>[class*='react-scroll-to-bottom']>div"
+    );
+    this.positionForm = document.querySelector("form").parentNode;
+    // this.styledThread = document.querySelector("main");
+    // this.threadContent = document.querySelector(".gAnhyd");
     this.scroller = Array.from(
       document.querySelectorAll('[class*="react-scroll-to"]')
     ).filter((el) => el.classList.contains("h-full"))[0];
+    this.hiddens = Array.from(document.querySelectorAll(".overflow-hidden"));
     this.images = Array.from(document.querySelectorAll("img[srcset]"));
   }
   fixLocation() {
-    this.threadWrapper.style.overflow = "auto";
-    this.styledThread.style.overflow = "auto";
-    this.threadContent.style.overflow = "auto";
+    this.hiddens.forEach((el) => {
+      el.classList.remove("overflow-hidden");
+    });
     this.spacer.style.display = "none";
     this.thread.style.maxWidth = "960px";
     this.thread.style.marginInline = "auto";
@@ -163,9 +166,9 @@ class Elements {
     });
   }
   restoreLocation() {
-    this.threadWrapper.style.overflow = null;
-    this.styledThread.style.overflow = null;
-    this.threadContent.style.overflow = null;
+    this.hiddens.forEach((el) => {
+      el.classList.add("overflow-hidden");
+    });
     this.spacer.style.display = null;
     this.thread.style.maxWidth = null;
     this.thread.style.marginInline = null;
@@ -208,9 +211,10 @@ function getData() {
   const globalCss = getCssFromSheet(
     document.querySelector("link[rel=stylesheet]").sheet
   );
-  const localCss = getCssFromSheet(
-    document.querySelector(`style[data-styled="active"]`).sheet
-  );
+  const localCss =
+    getCssFromSheet(
+      document.querySelector(`style[data-styled][data-styled-version]`).sheet
+    ) || "body{}";
   const data = {
     main: document.querySelector("main").outerHTML,
     // css: `${globalCss} /* GLOBAL-LOCAL */ ${localCss}`,
