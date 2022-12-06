@@ -84,7 +84,12 @@ function downloadThread({ as = Format.PNG } = {}) {
         }
 
         //Delete copy button from code blocks
-        cloneDoc.querySelector('button.flex').remove();
+        let listOfCopyBtns = cloneDoc.querySelectorAll('button.flex');
+
+        for (let i = 0, leng = listOfCopyBtns.length; i < leng; i++) {
+          let button = listOfCopyBtns[i];
+          button.remove();
+        }
       }
     }
   ).then(async function (canvas) {
