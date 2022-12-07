@@ -9,14 +9,21 @@ When you want to share some of your chats, it's very difficult to snapshot the e
 
 ## How to install it
 
-To install ChatGPT Export, follow these steps:
+### Install to Chrome/Edge
 
-1. Download the latest release of the extension from the [releases page](https://github.com/liady/ChatGPT-pdf/releases) on GitHub.
+1. Download `chrome-chatgpt-share.zip` from the latest release in [releases page](https://github.com/liady/ChatGPT-pdf/releases).
 2. Unzip the downloaded file to extract the extension files.
-3. In Google Chrome, open the Extensions page (`chrome://extensions/`).
+3. In Chrome/Edge go to the extensions page (`chrome://extensions` or `edge://extensions`).
 4. Enable Developer mode by clicking the toggle switch in the top right corner of the page.
 5. Click the `Load unpacked` button and select the directory where you unzipped the extension files.
 6. ChatGPT Export should now be installed and active on the ChatGPT website (https://chat.openai.com/chat).
+
+### Install to Firefox
+
+1. Download `firefox-chatgpt-share.zip` from the latest release in [releases page](https://github.com/liady/ChatGPT-pdf/releases).
+3. Go to `about:debugging`, click "This Firefox" on the sidebar.
+4. Click "Load Temporary Add-on" button, then select the zipped file.
+5. ChatGPT Export should now be installed and active on the ChatGPT website (https://chat.openai.com/chat).
 
 ## How to use it
 
