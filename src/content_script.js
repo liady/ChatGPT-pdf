@@ -78,6 +78,10 @@ function downloadThread({ as = Format.PNG } = {}) {
     letterRendering: true,
   }).then(async function (canvas) {
     elements.restoreLocation();
+
+    //Restore style
+    document.body.style.lineHeight = null;
+
     window.devicePixelRatio = pixelRatio;
     const imgData = canvas.toDataURL("image/png");
     requestAnimationFrame(() => {
