@@ -40,9 +40,9 @@ Click them to generate a PNG, download a PDF or create a HTML of the entire chat
 <center><img height="600" alt="Arrows2" src="https://user-images.githubusercontent.com/7003853/205508289-fb56f028-021e-4ca5-8dc4-a65626888760.png"></center>
 
 ## Roadmap
+- [X] Support Firefox
 - [ ] Allow choosing resolution / file size
 - [ ] Allow splitting to smaller partial images (for Twitter, for example)
-- [ ] Support Firefox
 
 ## Contribution
 Thanks [adrianmarinwork](https://github.com/adrianmarinwork) for fixing issues.
