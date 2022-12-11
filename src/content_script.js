@@ -71,17 +71,10 @@ function downloadThread({ as = Format.PNG } = {}) {
   const minRatio = as === Format.PDF ? 2 : 2.5;
   window.devicePixelRatio = Math.max(pixelRatio, minRatio);
 
-  //Fix to the text shifting down when generating the canvas
-  document.body.style.lineHeight = '0.5';
-
   html2canvas(elements.thread, {
     letterRendering: true,
   }).then(async function (canvas) {
     elements.restoreLocation();
-
-    //Restore style
-    document.body.style.lineHeight = null;
-
     window.devicePixelRatio = pixelRatio;
     const imgData = canvas.toDataURL("image/png");
     requestAnimationFrame(() => {
@@ -172,6 +165,8 @@ class Elements {
       img.setAttribute("srcset_old", srcset);
       img.setAttribute("srcset", "");
     });
+    //Fix to the text shifting down when generating the canvas
+    document.body.style.lineHeight = "0.5";
   }
   restoreLocation() {
     this.hiddens.forEach((el) => {
@@ -188,6 +183,7 @@ class Elements {
       img.setAttribute("srcset", srcset);
       img.setAttribute("srcset_old", "");
     });
+    document.body.style.lineHeight = null;
   }
 }
 
