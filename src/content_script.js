@@ -1,3 +1,4 @@
+const buttonOuterHTMLFallback = `<button class="btn flex justify-center gap-2 btn-neutral" id="download-png-button">Try Again</button>`;
 async function init() {
   if (window.buttonsInterval) {
     clearInterval(window.buttonsInterval);
@@ -7,17 +8,56 @@ async function init() {
     if (!actionsArea) {
       return;
     }
-    const buttons = actionsArea.querySelectorAll("button");
-    const hasTryAgainButton = Array.from(buttons).some((button) => {
-      return !button.id?.includes("download");
-    });
-    if (hasTryAgainButton && buttons.length === 1) {
-      const TryAgainButton = actionsArea.querySelector("button");
+    if (shouldAddButtons(actionsArea)) {
+      let TryAgainButton = actionsArea.querySelector("button");
+      if (!TryAgainButton) {
+        const parentNode = document.createElement("div");
+        parentNode.innerHTML = buttonOuterHTMLFallback;
+        TryAgainButton = parentNode.querySelector("button");
+      }
       addActionsButtons(actionsArea, TryAgainButton);
-    } else if (!hasTryAgainButton) {
+    } else if(shouldRemoveButtons()){
       removeButtons();
     }
   }, 200);
+}
+
+function shouldRemoveButtons() {
+  const isOpenScreen = document.querySelector("h1.text-4xl");
+  if(isOpenScreen){
+    return true;
+  }
+  const inConversation = document.querySelector("form button>div");
+  if(inConversation){
+    return true;
+  }
+  return false;
+}
+
+function shouldAddButtons(actionsArea) {
+  // first, check if there's a "Try Again" button and no other buttons
+  const buttons = actionsArea.querySelectorAll("button");
+  const hasTryAgainButton = Array.from(buttons).some((button) => {
+    return !button.id?.includes("download");
+  });
+  if (hasTryAgainButton && buttons.length === 1) {
+    return true;
+  }
+
+  // otherwise, check if open screen is not visible
+  const isOpenScreen = document.querySelector("h1.text-4xl");
+  if (isOpenScreen) {
+    return false;
+  }
+
+  // check if the conversation is finished and there are no share buttons
+  const finishedConversation = document.querySelector("form button>svg");
+  const hasShareButtons = actionsArea.querySelectorAll("button[share-ext]");
+  if (finishedConversation && !hasShareButtons.length) {
+    return true;
+  }
+
+  return false;
 }
 
 const Format = {
@@ -43,6 +83,7 @@ function removeButtons() {
 function addActionsButtons(actionsArea, TryAgainButton) {
   const downloadButton = TryAgainButton.cloneNode(true);
   downloadButton.id = "download-png-button";
+  downloadButton.setAttribute("share-ext", "true");
   downloadButton.innerText = "Generate PNG";
   downloadButton.onclick = () => {
     downloadThread();
@@ -50,6 +91,7 @@ function addActionsButtons(actionsArea, TryAgainButton) {
   actionsArea.appendChild(downloadButton);
   const downloadPdfButton = TryAgainButton.cloneNode(true);
   downloadPdfButton.id = "download-pdf-button";
+  downloadButton.setAttribute("share-ext", "true");
   downloadPdfButton.innerText = "Download PDF";
   downloadPdfButton.onclick = () => {
     downloadThread({ as: Format.PDF });
@@ -57,6 +99,7 @@ function addActionsButtons(actionsArea, TryAgainButton) {
   actionsArea.appendChild(downloadPdfButton);
   const exportHtml = TryAgainButton.cloneNode(true);
   exportHtml.id = "download-html-button";
+  downloadButton.setAttribute("share-ext", "true");
   exportHtml.innerText = "Share Link";
   exportHtml.onclick = () => {
     sendRequest();
