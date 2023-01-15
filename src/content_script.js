@@ -16,7 +16,7 @@ async function init() {
         TryAgainButton = parentNode.querySelector("button");
       }
       addActionsButtons(actionsArea, TryAgainButton);
-    } else if(shouldRemoveButtons()){
+    } else if (shouldRemoveButtons()) {
       removeButtons();
     }
   }, 200);
@@ -24,11 +24,11 @@ async function init() {
 
 function shouldRemoveButtons() {
   const isOpenScreen = document.querySelector("h1.text-4xl");
-  if(isOpenScreen){
+  if (isOpenScreen) {
     return true;
   }
   const inConversation = document.querySelector("form button>div");
-  if(inConversation){
+  if (inConversation) {
     return true;
   }
   return false;
@@ -160,20 +160,6 @@ function handlePdf(imgData, canvas, pixelRatio) {
   pdf.save("chat-gpt.pdf");
 }
 
-// async function getWidthHeightFromBase64(base64Img) {
-//   return new Promise((resolve, reject) => {
-//     // Then, create a new Image from the blob
-//     const img = new Image();
-//     img.src = base64Img;
-
-//     img.onload = () => {
-//       const width = img.width;
-//       const height = img.height;
-//       resolve({ width, height });
-//     };
-//   });
-// }
-
 class Elements {
   constructor() {
     this.init();
@@ -181,15 +167,13 @@ class Elements {
   init() {
     // this.threadWrapper = document.querySelector(".cdfdFe");
     this.spacer = document.querySelector(".w-full.h-48.flex-shrink-0");
-    this.thread = document.querySelector(
-      "[class*='react-scroll-to-bottom']>[class*='react-scroll-to-bottom']>div"
+    this.thread = document.querySelector("main>div.flex-1>div>div");
+    this.feedback = this.thread.querySelectorAll(
+      "div>div.text-base>div:nth-of-type(2)>div:nth-of-type(2)"
     );
     this.positionForm = document.querySelector("form").parentNode;
     // this.styledThread = document.querySelector("main");
     // this.threadContent = document.querySelector(".gAnhyd");
-    this.scroller = Array.from(
-      document.querySelectorAll('[class*="react-scroll-to"]')
-    ).filter((el) => el.classList.contains("h-full"))[0];
     this.hiddens = Array.from(document.querySelectorAll(".overflow-hidden"));
     this.images = Array.from(document.querySelectorAll("img[srcset]"));
   }
@@ -201,8 +185,9 @@ class Elements {
     this.thread.style.maxWidth = "960px";
     this.thread.style.marginInline = "auto";
     this.positionForm.style.display = "none";
-    this.scroller.classList.remove("h-full");
-    this.scroller.style.minHeight = "100vh";
+    this.feedback.forEach((item) => {
+      item.style.display = "none";
+    });
     this.images.forEach((img) => {
       const srcset = img.getAttribute("srcset");
       img.setAttribute("srcset_old", srcset);
@@ -219,8 +204,10 @@ class Elements {
     this.thread.style.maxWidth = null;
     this.thread.style.marginInline = null;
     this.positionForm.style.display = null;
-    this.scroller.classList.add("h-full");
-    this.scroller.style.minHeight = null;
+    this.feedback.forEach((item) => {
+      item.style.display = null;
+    });
+
     this.images.forEach((img) => {
       const srcset = img.getAttribute("srcset_old");
       img.setAttribute("srcset", srcset);
