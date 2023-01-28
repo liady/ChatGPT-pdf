@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ChatGPT Download",
   "description": "Download a PNG or PDF of your chat with ChatGPT",
-  "version": "1.3.4",
+  "version": "1.3.6",
   "author": "Liad Yosef",
   "icons": {
     "48": "icons/48.png"
@@ -18,4 +18,3 @@
     }
   ]
 }
-
