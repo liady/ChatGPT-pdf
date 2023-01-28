@@ -35,6 +35,11 @@ function shouldRemoveButtons() {
 }
 
 function shouldAddButtons(actionsArea) {
+  // Blinking button fix by @pedrokohler
+  if(shouldRemoveButtons()){
+    return false;
+  }
+
   // first, check if there's a "Try Again" button and no other buttons
   const buttons = actionsArea.querySelectorAll("button");
   const hasTryAgainButton = Array.from(buttons).some((button) => {
