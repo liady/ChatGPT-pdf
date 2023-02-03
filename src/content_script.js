@@ -258,10 +258,8 @@ function getData() {
   const globalCss = getCssFromSheet(
     document.querySelector("link[rel=stylesheet]").sheet
   );
-  const localCss =
-    getCssFromSheet(
-      document.querySelector(`style[data-styled][data-styled-version]`).sheet
-    ) || "body{}";
+  const stylesheet = document.querySelector(`style[data-styled][data-styled-version]`);
+  const localCss = stylesheet ? getCssFromSheet(stylesheet.sheet) : "body{}";
   const data = {
     main: document.querySelector("main").outerHTML,
     // css: `${globalCss} /* GLOBAL-LOCAL */ ${localCss}`,
