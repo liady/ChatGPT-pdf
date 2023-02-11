@@ -252,7 +252,7 @@ function getData() {
   );
   const localCss =
     getCssFromSheet(
-      document.querySelector(`style[data-styled][data-styled-version]`).sheet
+      document.querySelector(`style[data-emotion]`).sheet
     ) || "body{}";
   const data = {
     main: document.querySelector("main").outerHTML,
