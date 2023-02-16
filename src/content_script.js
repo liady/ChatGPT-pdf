@@ -228,15 +228,12 @@ class Elements {
     this.init();
   }
   init() {
-    // this.threadWrapper = document.querySelector(".cdfdFe");
     this.spacer = document.querySelector(".w-full.h-32.md\\:h-48.flex-shrink-0");
     this.thread = document.querySelector("main>div.flex-1>div>div");
     this.feedback = this.thread.querySelectorAll(
         "div>div.text-base>div:nth-of-type(2)>div:nth-of-type(2)"
     );
     this.positionForm = document.querySelector("form").parentNode;
-    // this.styledThread = document.querySelector("main");
-    // this.threadContent = document.querySelector(".gAnhyd");
     this.hiddens = Array.from(document.querySelectorAll(".overflow-hidden"));
     this.images = Array.from(document.querySelectorAll("img[srcset]"));
   }
@@ -314,7 +311,6 @@ function getData() {
       ) || "body{}";
   const data = {
     main: document.querySelector("main").outerHTML,
-    // css: `${globalCss} /* GLOBAL-LOCAL */ ${localCss}`,
     globalCss,
     localCss,
   };
@@ -327,7 +323,6 @@ function getCssFromSheet(sheet) {
       .join("");
 }
 
-// run init
 if (
     document.readyState === "complete" ||
     document.readyState === "interactive"
