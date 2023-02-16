@@ -2,20 +2,19 @@
   "manifest_version": 3,
   "name": "ChatGPT Download",
   "description": "Download a PNG or PDF of your chat with ChatGPT",
-  "version": "1.3.4",
+  "version": "1.3.6",
   "author": "Liad Yosef",
   "icons": {
-    "48": "icons/48.png"
+    "48": "src/icons/48.png"
   },
   "content_scripts": [
     {
       "matches": ["https://chat.openai.com/*"],
       "js": [
-        "scripts/html2canvas.min.js",
-        "scripts/jspdf.umd.min.js",
-        "content_script.js"
+        "src/scripts/html2canvas.min.js",
+        "src/scripts/jspdf.umd.min.js",
+        "src/content_script.js"
       ]
     }
   ]
 }
-
