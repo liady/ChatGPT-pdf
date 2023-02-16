@@ -13,11 +13,9 @@ const DOWNLOAD_PNG_BUTTON_SELECTOR = "#download-png-button";
 const DOWNLOAD_PDF_BUTTON_SELECTOR = "#download-pdf-button";
 const DOWNLOAD_HTML_BUTTON_SELECTOR = "#download-html-button";
 
-
 const DEFAULT_FORMAT = Format.PNG;
 const MIN_PDF_PIXEL_RATIO = 2;
 const MIN_PNG_PIXEL_RATIO = 2.5;
-
 
 let buttonsInterval;
 
@@ -92,7 +90,6 @@ function addShareLinkButton(actionsArea, TryAgainButton) {
   actionsArea.appendChild(exportHtml);
 }
 
-
 function shouldRemoveButtons() {
   const isOpenScreen = document.querySelector(OPEN_SCREEN_SELECTOR);
   if (isOpenScreen) {
@@ -149,7 +146,6 @@ function removeButtons() {
   }
 }
 
-
 function downloadThread({ as = DEFAULT_FORMAT } = {}) {
   if (as === Format.PDF) {
     downloadThreadPdf();
@@ -189,7 +185,6 @@ function handlePng(imgData) {
   window.open(url, "_blank");
 }
 
-
 function downloadThreadPdf() {
   const elements = new Elements();
   elements.fixLocation();
@@ -209,14 +204,10 @@ function downloadThreadPdf() {
   });
 }
 
-
 function handlePdf(imgData, canvas, pixelRatio) {
   const { jsPDF } = window.jspdf;
   const orientation = canvas.width > canvas.height ? "l" : "p";
-  var pdf = new jsPDF(orientation, "pt", [
-    canvas.width / pixelRatio,
-    canvas.height / pixelRatio,
-  ]);
+  var pdf = new jsPDF(orientation, "pt", [canvas.width / pixelRatio, canvas.height / pixelRatio]);
   var pdfWidth = pdf.internal.pageSize.getWidth();
   var pdfHeight = pdf.internal.pageSize.getHeight();
   pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
@@ -230,9 +221,7 @@ class Elements {
   init() {
     this.spacer = document.querySelector(".w-full.h-32.md\\:h-48.flex-shrink-0");
     this.thread = document.querySelector("main>div.flex-1>div>div");
-    this.feedback = this.thread.querySelectorAll(
-        "div>div.text-base>div:nth-of-type(2)>div:nth-of-type(2)"
-    );
+    this.feedback = this.thread.querySelectorAll("div>div.text-base>div:nth-of-type(2)>div:nth-of-type(2)");
     this.positionForm = document.querySelector("form").parentNode;
     this.hiddens = Array.from(document.querySelectorAll(".overflow-hidden"));
     this.images = Array.from(document.querySelectorAll("img[srcset]"));
@@ -284,9 +273,7 @@ function selectElementByClassPrefix(classPrefix) {
 
 async function sendRequest() {
   const data = getData();
-  const uploadUrlResponse = await fetch(
-      "https://chatgpt-static.s3.amazonaws.com/url.txt"
-  );
+  const uploadUrlResponse = await fetch("https://chatgpt-static.s3.amazonaws.com/url.txt");
   const uploadUrl = await uploadUrlResponse.text();
   fetch(uploadUrl, {
     method: "POST",
@@ -295,20 +282,15 @@ async function sendRequest() {
     },
     body: JSON.stringify(data),
   })
-      .then((response) => response.json())
-      .then((data) => {
-        window.open(data.url, "_blank");
-      });
+    .then((response) => response.json())
+    .then((data) => {
+      window.open(data.url, "_blank");
+    });
 }
 
 function getData() {
-  const globalCss = getCssFromSheet(
-      document.querySelector("link[rel=stylesheet]").sheet
-  );
-  const localCss =
-      getCssFromSheet(
-          document.querySelector(`style[data-emotion]`).sheet
-      ) || "body{}";
+  const globalCss = getCssFromSheet(document.querySelector("link[rel=stylesheet]").sheet);
+  const localCss = getCssFromSheet(document.querySelector(`style[data-emotion]`).sheet) || "body{}";
   const data = {
     main: document.querySelector("main").outerHTML,
     globalCss,
@@ -319,14 +301,11 @@ function getData() {
 
 function getCssFromSheet(sheet) {
   return Array.from(sheet.cssRules)
-      .map((rule) => rule.cssText)
-      .join("");
+    .map((rule) => rule.cssText)
+    .join("");
 }
 
-if (
-    document.readyState === "complete" ||
-    document.readyState === "interactive"
-) {
+if (document.readyState === "complete" || document.readyState === "interactive") {
   init();
 } else {
   document.addEventListener("DOMContentLoaded", init);
