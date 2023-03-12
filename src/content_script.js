@@ -255,14 +255,16 @@ async function sendRequest() {
 }
 
 function getData() {
-  const globalCss = getCssFromSheet(
-    document.querySelector("link[rel=stylesheet]").sheet
-  );
+  // const globalCss = getCssFromSheet(
+  //   document.querySelector("link[rel=stylesheet]").sheet
+  // );
+  const globalStylesheet = document.querySelector("link[rel=stylesheet]");
+  const globalCss = globalStylesheet ? getCssFromSheet(globalStylesheet.sheet) : "";
   const stylesheet = document.querySelector(`style[data-styled][data-styled-version]`);
   const localCss = stylesheet ? getCssFromSheet(stylesheet.sheet) : "body{}";
+  const main = document.querySelector("main");
   const data = {
-    main: document.querySelector("main").outerHTML,
-    // css: `${globalCss} /* GLOBAL-LOCAL */ ${localCss}`,
+    main: main ? main.outerHTML : "",
     globalCss,
     localCss,
   };
