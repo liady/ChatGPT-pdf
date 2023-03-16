@@ -16,7 +16,7 @@ async function init() {
         TryAgainButton = parentNode.querySelector("button");
       }
       addActionsButtons(actionsArea, TryAgainButton);
-    } else if(shouldRemoveButtons()){
+    } else if (shouldRemoveButtons()) {
       removeButtons();
     }
   }, 200);
@@ -24,19 +24,21 @@ async function init() {
 
 function shouldRemoveButtons() {
   const isOpenScreen = document.querySelector("h1.text-4xl");
-  if(isOpenScreen){
+  if (isOpenScreen) {
     return true;
   }
   const inConversation = document.querySelector("form button>div");
-  if(inConversation){
-    return true;
+  if (inConversation) {
+    if (inConversation.innerText.indexOf('Regen') < 0) {
+      return true
+    }
   }
   return false;
 }
 
 function shouldAddButtons(actionsArea) {
   // if it should remove the button, then it shouldn't add it back, otherwise there will be an annoying loop and blinking buttons
-  if(shouldRemoveButtons()){
+  if (shouldRemoveButtons()) {
     return false;
   }
 
