@@ -1,4 +1,4 @@
-# ChatGPT Export and Share
+# ChatGPT Export and Share 
 > A Chrome extension for downloading your ChatGPT history to PNG, PDF or creating a sharable link
 <br/>
 
