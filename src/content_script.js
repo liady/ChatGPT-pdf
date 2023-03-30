@@ -10,7 +10,7 @@ async function init() {
     }
     if (shouldAddButtons(actionsArea)) {
       let TryAgainButton = actionsArea.querySelector("button");
-      if (!TryAgainButton) {
+      if (!TryAgainButton && TryAgainButton != null) {
         const parentNode = document.createElement("div");
         parentNode.innerHTML = buttonOuterHTMLFallback;
         TryAgainButton = parentNode.querySelector("button");
@@ -28,7 +28,7 @@ function shouldRemoveButtons() {
     return true;
   }
   const inConversation = document.querySelector("form button>div");
-  if(inConversation){
+  if(inConversation && !inConversation.innerText.includes('Regenerate')){
     return true;
   }
   return false;
