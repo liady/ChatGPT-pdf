@@ -10,7 +10,7 @@ async function init() {
     }
     if (shouldAddButtons(actionsArea)) {
       let TryAgainButton = actionsArea.querySelector("button");
-      if (!TryAgainButton && TryAgainButton != null) {
+      if (!TryAgainButton) {
         const parentNode = document.createElement("div");
         parentNode.innerHTML = buttonOuterHTMLFallback;
         TryAgainButton = parentNode.querySelector("button");
@@ -58,7 +58,7 @@ function shouldAddButtons(actionsArea) {
   // check if the conversation is finished and there are no share buttons
   const finishedConversation = document.querySelector("form button>svg");
   const hasShareButtons = actionsArea.querySelectorAll("button[share-ext]");
-  if (finishedConversation && !hasShareButtons.length) {
+  if (finishedConversation && !hasShareButtons.length && hasTryAgainButton) {
     return true;
   }
 
